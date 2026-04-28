@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header class="hero-section text-center shadow-lg">
+    <div class="container">
+        <h1 class="display-4 fw-bold mb-3">Цифровая Библиотека</h1>
+        <p class="lead mb-4">
+            Проблема поиска учебных материалов решена. <br>
+            Единая база знаний для студентов и преподавателей.
+        </p>
+        <button class="btn btn-outline-light btn-lg px-4 shadow-sm" data-bs-toggle="modal" data-bs-target="#addBookModal">
+            <i class="fas fa-plus-circle me-2"></i>Добавить ресурс
+        </button>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row justify-content-center search-container">
+        <div class="col-md-8">
+            <form action="/" method="GET" class="input-group input-group-lg shadow-sm">
+                <input type="text" name="search" class="form-control border-0" placeholder="Найти книгу, автора или категорию..." aria-label="Search">
+                <button class="btn btn-white bg-white text-primary border-0" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-4">
+        {% for book in books %}
+        <div class="col">
+            <div class="card h-100 book-card shadow-sm">
+                <div class="card-body d-flex flex-column">
+                    <div class="mb-2">
+                        <span class="badge category-badge px-3 py-2 rounded-pill">
+                            <i class="fas fa-tag me-1"></i>{{ book.category }}
+                        </span>
+                    </div>
+                    <h5 class="card-title fw-bold text-dark">{{ book.title }}</h5>
+                    <p class="card-text text-muted mb-4">
+                        <i class="fas fa-user-edit me-2"></i>{{ book.author }}
+                    </p>
+                    
+                    <div class="mt-auto">
+                        <a href="{{ book.link }}" target="_blank" class="btn btn-primary w-100 rounded-pill shadow-sm">
+                            <i class="fas fa-external-link-alt me-2"></i>Открыть
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-12 text-center py-5">
+            <i class="fas fa-book-open fa-3x text-muted mb-3"></i>
+            <p class="text-muted">Пока ничего не найдено. Добавьте первый материал!</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="modal fade" id="addBookModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header border-0 bg-light">
+                <h5 class="modal-title fw-bold">Новый ресурс</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/" method="POST">
+                <div class="modal-body p-4">
+                    <div class="mb-3">
+                        <label class="form-label">Название</label>
+                        <input type="text" name="title" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Автор</label>
+                        <input type="text" name="author" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Категория</label>
+                        <select name="category" class="form-select">
+                            <option value="Учебник">Учебник</option>
+                            <option value="Методичка">Методичка</option>
+                            <option value="Статья">Статья</option>
+                            <option value="Курс">Курс</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Ссылка на файл/сайт</label>
+                        <input type="url" name="link" class="form-control" required placeholder="https://...">
+                    </div>
+                </div>
+                <div class="modal-footer border-0 p-4 pt-0">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Отмена</button>
+                    <button type="submit" class="btn btn-primary px-4">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

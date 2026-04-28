@@ -1,0 +1,52 @@
+:root {
+    --primary-color: #1a237e; /* Темно-синий */
+    --accent-color: #0d47a1;
+    --light-bg: #f8f9fa;
+}
+
+.hero-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    color: white;
+    padding: 60px 0;
+    border-radius: 0 0 2rem 2rem;
+    margin-bottom: 40px;
+}
+
+.search-container {
+    margin-top: -30px;
+    z-index: 10;
+    position: relative;
+}
+
+.book-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    border-radius: 12px;
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+}
+
+.category-badge {
+    background-color: rgba(26, 35, 126, 0.1);
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+.btn-add-floating {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 1000;
+}
